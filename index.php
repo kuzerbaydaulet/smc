@@ -43,8 +43,8 @@
 
 				if(isset($_POST['login-field']) && isset($_POST['password-field'])){
 
-					$login = mysql_escape_string($_POST['login-field']);
-					$password = sha1(mysql_escape_string($_POST['password-field']));
+					$login = ($_POST['login-field']);
+					$password = sha1(($_POST['password-field']));
 
 					$query1 = $connection->query("SELECT * FROM company WHERE login = \"".$login."\" AND password = \"".$password."\" ");
 
@@ -87,9 +87,9 @@
 
 						if( $_POST['pass-field']==$_POST['re-pass-field'] ){
 
-							$login = mysql_escape_string($_POST['log-field']);
-							$pass = sha1(mysql_escape_string($_POST['pass-field']));
-							$name = mysql_escape_string($_POST['name-field']);
+							$login =($_POST['log-field']);
+							$pass = sha1(($_POST['pass-field']));
+							$name =($_POST['name-field']);
 
 							$query = $connection->query(" INSERT INTO company (id, login, password, name) VALUES (NULL, \"$login\", \"$pass\", \"$name\") ");
 							
@@ -229,7 +229,7 @@
 					
 					if($_POST['goods_type']!=""){
 						
-						$goods_type = mysql_escape_string($_POST['goods_type']);
+						$goods_type= ($_POST['goods_type']);
 						
 						$sql_text = "SELECT * FROM goods WHERE type = \"".$goods_type."\" ";
 						$query = $connection->query($sql_text);
@@ -250,9 +250,9 @@
 				if(isset($_POST['name_of_product']) && isset($_POST['type_of_product']) && isset($_POST['price_of_product'])){
 					
 					if($_POST['name_of_product']!="" && $_POST['type_of_product']!="" && $_POST['price_of_product']!=""){
-						$name_of_product = mysql_escape_string($_POST['name_of_product']);
-						$type_of_product = mysql_escape_string($_POST['type_of_product']);
-						$price_of_product = mysql_escape_string($_POST['price_of_product']);
+						$name_of_product ($_POST['name_of_product']);
+						$type_of_product ($_POST['type_of_product']);
+						$price_of_product ($_POST['price_of_product']);
 						
 						$sql_text = "INSERT INTO goods VALUES (NULL, \"$name_of_product\", \"$type_of_product\", \"$price_of_product\")";
 						$query = $connection->query($sql_text);
@@ -364,16 +364,16 @@
 				
 				){
 					
-					$name = mysql_escape_string($_POST['name']);
-					$surname = mysql_escape_string($_POST['surname']);
-					$phone = mysql_escape_string($_POST['phone']);
-					$manager = mysql_escape_string($_POST['manager-id']);
+					$nam($_POST['name']);
+					$surname($_POST['surname']);
+					$phone($_POST['phone']);
+					$manager($_POST['manager-id']);
 					
 					if( isset($_POST['reject-check']) ){
 						
 						if( isset( $_POST['cause'] ) && $_POST['cause']!="" ){
 							
-							$cause = mysql_escape_string($_POST['cause']);
+							$cause =($_POST['cause']);
 							
 							$query = $connection->query(" INSERT INTO clients (id, phone, name, surname) VALUES (NULL, ".$phone.", \"".$name."\", \"".$surname."\" ) ");
 							$id = $connection->insert_id;
@@ -414,10 +414,10 @@
 				if(isset($_POST['client_id']) && isset($_POST['goods_id']) && isset($_POST['result'])){
 					
 					if($_POST['client_id']!="" && $_POST['goods_id']!="" && $_POST['result']!=""){
-						$client_id = mysql_escape_string($_POST['client_id']);
+						$client_id ($_POST['client_id']);
 						$manager_id = $_SESSION['user']['id'];
-						$goods_id = mysql_escape_string($_POST['goods_id']);
-						$result = mysql_escape_string($_POST['result']);
+						$goods_id ($_POST['goods_id']);
+						$result ($_POST['result']);
 						
 						$sql_text = "INSERT INTO history_of_sales VALUES (NULL , ".$client_id.", ".$manager_id.", ".$goods_id.", NOW(), \"".$result."\") ";
 						
@@ -445,11 +445,11 @@
 					if($_POST['phone_number']!="" && $_POST['name']!="" && $_POST['surname']!="" && $_POST['goods'] && $_POST['result']!=""){
 						
 						$manager_id = $_SESSION['user']['id'];
-						$phone_number = mysql_escape_string($_POST['phone_number']);
-						$name = mysql_escape_string($_POST['name']);
-						$surname = mysql_escape_string($_POST['surname']);
-						$goods_id = mysql_escape_string($_POST['goods']);
-						$result = mysql_escape_string($_POST['result']);
+						$phone_number ($_POST['phone_number']);
+						$name ($_POST['name']);
+						$surname ($_POST['surname']);
+						$goods_id ($_POST['goods']);
+						$result ($_POST['result']);
 						
 						
 						$sql_text = "INSERT INTO clients VALUES (NULL, \"".$phone_number."\", \"".$name."\", \"".$surname."\") ";
@@ -470,14 +470,14 @@
 				
 				if( $_POST['client-id']!="" && $_POST['manager-id']!="" ){ 
 					
-					$client = mysql_escape_string($_POST['client-id']);
-					$manager = mysql_escape_string($_POST['manager-id']);
+					$client($_POST['client-id']);
+					$manager($_POST['manager-id']);
 					
 					if( isset($_POST['reject-check']) ){
 						
 						if( isset( $_POST['cause'] ) && $_POST['cause']!="" ){
 								
-								$cause = mysql_escape_string($_POST['cause']);
+								$cause = ($_POST['cause']);
 								
 								$query2 = $connection->query(" INSERT INTO history_call_center ( id, client_id, manager_to_id, rejection, rejection_cause, manager_from_id, date ) VALUES ( NULL, ".$client.", ".$manager.", 1, \"".$cause."\", ".$_SESSION['user']['id'].", NOW() ) ");
 								
